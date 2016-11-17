@@ -1,6 +1,12 @@
 'use strict';
-// Reference: https://projectpokemon.org/wiki/Pokemon_X/Y_3DS_Structure
+const common = require('./common');
 
-exports.parseBuffer = (buf, {parseNames = false, gen = 6, language}) => {
-  throw new Error('Gen 7 not implemented yet');
+exports.parseBuffer = (buf, {parseNames = false, language} = {}) => {
+  const data = common.parseBuffer(buf, {parseNames, language});
+
+  if (parseNames) {
+    common.assignReadableNames(data, language);
+  }
+
+  return data;
 };

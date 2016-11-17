@@ -1,13 +1,14 @@
 'use strict';
 const gen6 = require('./gen6');
 const gen7 = require('./gen7');
+const common = require('./common');
 
 exports.parseBuffer = (buf, {parseNames = false, gen = 6, language} = {}) => {
   let parsed;
   if (gen === 6) {
-    parsed = gen6.parseBuffer(buf, {parseNames, gen, language});
+    parsed = gen6.parseBuffer(buf, {parseNames, language});
   } else if (gen === 7) {
-    parsed = gen7.parseBuffer(buf, {parseNames, gen, language});
+    parsed = gen7.parseBuffer(buf, {parseNames, language});
   } else {
     throw new Error('Unsupported gen');
   }
@@ -18,11 +19,11 @@ exports.parseFile = (path, options) => {
   return exports.parseBuffer(require('fs').readFileSync(path), options);
 };
 
-exports.assignReadableNames = gen6.assignReadableNames;
-exports.getPokemonData = gen6.getPokemonData;
-exports.getItemData = gen6.getItemData;
-exports.getMoveData = gen6.getMoveData;
-exports.getAbilityData = gen6.getAbilityData;
-exports.getNatureData = gen6.getNatureData;
-exports.getMedalData = gen6.getMedalData;
-exports.getRibbonData = gen6.getRibbonData;
+exports.assignReadableNames = common.assignReadableNames;
+exports.getPokemonData = common.getPokemonData;
+exports.getItemData = common.getItemData;
+exports.getMoveData = common.getMoveData;
+exports.getAbilityData = common.getAbilityData;
+exports.getNatureData = common.getNatureData;
+exports.getMedalData = common.getMedalData;
+exports.getRibbonData = common.getRibbonData;
