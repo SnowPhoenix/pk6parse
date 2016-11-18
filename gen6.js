@@ -12,7 +12,6 @@ exports.parseBuffer = (buf, {parseNames = false, language} = {}) => {
   data.hasStarMarking = !!(markingByte & 0x10);
   data.hasDiamondMarking = !!(markingByte & 0x20);
 
-  data._rawPk6 = data._rawFile;
   data.language = [null, 'JPN', 'ENG', 'FRE', 'ITA', 'GER', '???', 'SPA', 'KOR'][buf.readUInt8(0xe3)];
 
   if (parseNames) {
