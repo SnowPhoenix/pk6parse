@@ -28,6 +28,9 @@ exports.parseBuffer = (buf, {parseNames = false, language} = {}) => {
   data.hasPinkStarMarking = Boolean(markingByte & 0x08);
   data.hasPinkDiamondMarking = Boolean(markingByte & 0x02);
 
+
+  data.language = [null, 'JPN', 'ENG', 'FRE', 'ITA', 'GER', '???', 'SPA', 'KOR', 'CHS', 'CHT'][buf.readUInt8(0xe3)];
+
   if (parseNames) {
     common.assignReadableNames(data, language);
   }
