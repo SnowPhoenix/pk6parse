@@ -12,6 +12,20 @@ exports.parseBuffer = (buf, {parseNames = false, language} = {}) => {
   data.hyperTrainedSpDef = Boolean(hyperTraining & 0x10);
   data.hyperTrainedSpe = Boolean(hyperTraining & 0x20);
 
+  const markingByte = buf.readUInt16LE(0x16);
+  data.hasBlueCircleMarking = Boolean(markingByte & 0x400);
+  data.hasBlueTriangleMarking = Boolean(markingByte & 0x100);
+  data.hasBlueSquareMarking = Boolean(markingByte & 0x40);
+  data.hasBlueHeartMarking = Boolean(markingByte & 0x10);
+  data.hasBlueStarMarking = Boolean(markingByte & 0x04);
+  data.hasBlueDiamondMarking = Boolean(markingByte & 0x01);
+  data.hasPinkCircleMarking = Boolean(markingByte & 0x800);
+  data.hasPinkTriangleMarking = Boolean(markingByte & 0x200);
+  data.hasPinkSquareMarking = Boolean(markingByte & 0x80);
+  data.hasPinkHeartMarking = Boolean(markingByte & 0x20);
+  data.hasPinkStarMarking = Boolean(markingByte & 0x08);
+  data.hasPinkDiamondMarking = Boolean(markingByte & 0x02);
+
   if (parseNames) {
     common.assignReadableNames(data, language);
   }
