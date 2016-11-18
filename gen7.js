@@ -4,6 +4,8 @@ const common = require('./common');
 exports.parseBuffer = (buf, {parseNames = false, language} = {}) => {
   const data = common.parseBuffer(buf, {parseNames, language});
 
+  data.gen = 7;
+
   const hyperTraining = buf.readUInt16LE(0xDE);
   data.hyperTrainedHP = Boolean(hyperTraining & 0x01);
   data.hyperTrainedAtk = Boolean(hyperTraining & 0x02);

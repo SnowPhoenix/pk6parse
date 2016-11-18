@@ -4,6 +4,8 @@ const common = require('./common');
 exports.parseBuffer = (buf, {parseNames = false, language} = {}) => {
   const data = common.parseBuffer(buf, {parseNames, language});
 
+  data.gen = 6;
+
   const markingByte = buf.readUInt8(0x2a);
   data.hasCircleMarking = !!(markingByte & 0x01);
   data.hasTriangleMarking = !!(markingByte & 0x02);
