@@ -1,10 +1,10 @@
 const expect = require('chai').use(require('dirty-chai')).expect;
 const _ = require('lodash');
-const pk6parse = require('..');
+const pk6parse = require('../..');
 const expected_pkmn1 = require('./pkmn1_expected');
 const expected_kyurem = require('./kyurem-w_expected');
 
-describe('pk6parse', () => {
+describe('gen 6', () => {
   it('allows a file to be parsed', () => {
     expect(pk6parse.parseFile(`${__dirname}/pkmn1.pk6`)).to.eql(expected_pkmn1);
     expect(pk6parse.parseFile(`${__dirname}/kyurem-w.pk6`)).to.eql(expected_kyurem);

@@ -50,7 +50,7 @@ const calculateHiddenPower = (hp, atk, def, spa, spd, spe) => ({
   power: 30 + Math.floor(((hp & 2) + 2 * (atk & 2) + 4 * (def & 2) + 8 * (spe & 2) + 16 * (spa & 2) + 32 * (spd & 2)) * 20 / 63)
 });
 
-exports.parseBuffer = (buf, {parseNames = false, gen = 6, language} = {}) => {
+exports.parseBuffer = buf => {
   if (buf.readUInt16LE(0x04) || [232, 260].indexOf(buf.length) === -1 || !checksumIsValid(buf) || buf.readUInt8(0x58) ||
       buf.readUInt8(0x90) || buf.readUInt8(0xc8)) {
     throw new TypeError('The provided buffer is not valid pk6 data');
@@ -62,6 +62,7 @@ exports.parseBuffer = (buf, {parseNames = false, gen = 6, language} = {}) => {
   data.heldItemId = buf.readUInt16LE(0x0a);
   data.tid = buf.readUInt16LE(0x0c);
   data.sid = buf.readUInt16LE(0x0e);
+  data.tidFull = buf.readUInt32LE(0x0c);
   data.exp = buf.readUInt32LE(0x10);
   data.abilityId = buf.readUInt8(0x14);
   data.abilityNum = buf.readUInt8(0x15);

@@ -6,6 +6,8 @@ exports.parseBuffer = (buf, {parseNames = false, language} = {}) => {
 
   data.gen = 6;
 
+  data.idNo = data.tid;
+
   const markingByte = buf.readUInt8(0x2a);
   data.hasCircleMarking = !!(markingByte & 0x01);
   data.hasTriangleMarking = !!(markingByte & 0x02);

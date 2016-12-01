@@ -6,6 +6,12 @@ exports.parseBuffer = (buf, {parseNames = false, language} = {}) => {
 
   data.gen = 7;
 
+  if (data.gameId < 30) {
+    data.idNo = data.tid;
+  } else {
+    data.idNo = data.tidFull % 1000000;
+  }
+
   const hyperTraining = buf.readUInt16LE(0xDE);
   data.hyperTrainedHP = Boolean(hyperTraining & 0x01);
   data.hyperTrainedAtk = Boolean(hyperTraining & 0x02);
